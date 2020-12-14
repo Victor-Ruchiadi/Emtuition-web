@@ -1,0 +1,37 @@
+<div class="wrapper">
+    <div class="container">
+        <div class="left">
+            <h1 class="title">LOGIN</h1>
+            <br>
+            <form action="">
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" autocomplete="off" placeholder="Username" name="username" [(ngModel)]="username">
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="{{ inputType }}" id="password" placeholder="Password" name="password" [(ngModel)]="password">
+                    <i class="eye-con fas" (click)="changeType()" [ngClass]="{
+                        'fa-eye': passwordAppear === true,
+                        'fa-eye-slash': passwordAppear === false
+                    }"></i>
+                </div>
+                <button type="button" class="login-btn" (click)="onSubmit()">LOG IN</button>
+                <button type="button" class="login-btn google-btn" (click)="googleLogin()">
+                    <div>
+                        <i class="fab fa-google"></i>
+                        <p class="btnText">Log in with Google</p>
+                    </div>
+                </button>
+                <button type="button" class="login-btn fb-btn" (click)="facebookLogin()">
+                    <div>
+                        <i class="fab fa-facebook-f"></i>
+                        <p class="btnText">Log in with Facebook</p>
+                    </div>
+                </button>
+            </form>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+</div>

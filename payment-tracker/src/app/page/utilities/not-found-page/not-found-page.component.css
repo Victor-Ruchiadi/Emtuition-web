@@ -1,0 +1,30 @@
+.wrapper {
+    background-color: #1A294E;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    /* width: 100%; */
+    /* height: 100%; */
+    /* transform: translateY(50%); */
+    padding-top: 10%;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+a {
+    color: #425CB7;
+    text-decoration: none;
+    text-align: left;
+}
+
+a:hover {
+    color: #677ed1;
+}

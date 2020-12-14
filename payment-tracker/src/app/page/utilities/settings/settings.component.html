@@ -1,0 +1,79 @@
+<div class="wrapper">
+    <div class="container">
+        <form action="">
+            <div class="section-container">
+                <div class="section-header" (click)="section1 = !section1">
+                    <h1>1. Personal Information</h1>
+                    <i class="fas" [ngClass]="{
+                        'fa-minus-circle': section1 === true,
+                        'fa-plus-circle': section1 === false
+                    }"></i>
+                </div>
+                <div class="section-content" [ngStyle]="{'display':section1 === true ? 'block' : 'none'}">
+                    <label for="username">Username:</label>
+                    <input name="username" [(ngModel)]="form.username" type="text" id="username" readonly>
+                    <label for="google">Google:</label>
+                    <div *ngIf="googleBinded === 'false'; else unbindGoogleButton">
+                        <button class="social-button google-button" (click)="googleBind()">
+                            <i class="fab fa-google"></i>
+                            <p>Bind with Google</p>
+                        </button>
+                    </div>
+                    <ng-template #unbindGoogleButton>
+                        <button class="social-button google-button" (click)="googleUnbind()">
+                            <i class="fab fa-google"></i>
+                            <p>Unbind</p>
+                        </button>
+                    </ng-template>
+                    <label for="facebook-button">Facebook:</label>
+                    <div *ngIf="facebookBinded === 'false'; else unbindFacebookButton">
+                        <button class="social-button facebook-button" (click)="facebookBind()">
+                            <i class="fab fa-facebook-f"></i>
+                            <p>Bind with Facebook</p>
+                        </button>
+                    </div>
+                    <ng-template #unbindFacebookButton>
+                        <button class="social-button facebook-button" (click)="facebookUnbind()">
+                            <i class="fab fa-facebook-f"></i>
+                            <p>Unbind</p>
+                        </button>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="section-container">
+                <div class="section-header" (click)="section2 = !section2">
+                    <h1>2. Security</h1>
+                    <i class="fas" [ngClass]="{
+                        'fa-minus-circle': section2 === true,
+                        'fa-plus-circle': section2 === false
+                    }"></i>
+                </div>
+                <div class="section-content" [ngStyle]="{'display':section2 === true ? 'block' : 'none'}">
+                    <label for="old-password">Old Password:</label>
+                    <input name="old-password" [(ngModel)]="form.oldPassword" type="{{inputType1}}" id="old-password">
+                    <i class="eye-con fas" (click)="changeType1()" [ngClass]="{
+                        'fa-eye': passwordAppear1 === true,
+                        'fa-eye-slash': passwordAppear1 === false
+                    }"></i>
+                    <label for="password">New Password:</label>
+                    <input name="password" [(ngModel)]="form.password" type="{{inputType2}}" id="password" value="pas">
+                    <i class="eye-con fas" (click)="changeType2()" [ngClass]="{
+                        'fa-eye': passwordAppear2 === true,
+                        'fa-eye-slash': passwordAppear2 === false
+                    }"></i>
+                    <label for="password-confirmation">Confirm Password:</label>
+                    <input name="password-confirmation" [(ngModel)]="form.confirmPassword" type="{{inputType3}}" id="password-confirmation">
+                    <i class="eye-con fas" (click)="changeType3()" [ngClass]="{
+                        'fa-eye': passwordAppear3 === true,
+                        'fa-eye-slash': passwordAppear3 === false
+                    }"></i>
+                    <label for="pin">Pin:</label>
+                    <input name="pin" max="999999" [(ngModel)]="form.pin" type="number" id="pin">
+                </div>
+            </div>
+            <div class="action-panel">
+                <button type="button" (click)="changeSetting()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
