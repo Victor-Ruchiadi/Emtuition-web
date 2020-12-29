@@ -71,6 +71,10 @@ button {
     border: none;
 }
 
+button:hover {
+    background-color: #9fdccd;
+}
+
 .social-button {
     padding: 0;
     padding-left: 10px;
@@ -96,8 +100,16 @@ button {
     background-color: #425CB7;
 }
 
+.facebook-button:hover {
+    background-color: #9facdc;
+}
+
 .google-button {
     background-color: #f55a4e;
+}
+
+.google-button:hover {
+    background-color: #faaca6;
 }
 
 .eye-con {

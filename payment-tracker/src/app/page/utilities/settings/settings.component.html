@@ -14,26 +14,26 @@
                     <input name="username" [(ngModel)]="form.username" type="text" id="username" readonly>
                     <label for="google">Google:</label>
                     <div *ngIf="googleBinded === 'false'; else unbindGoogleButton">
-                        <button class="social-button google-button" (click)="googleBind()">
+                        <button type="button" class="social-button google-button" (click)="googleBind()">
                             <i class="fab fa-google"></i>
                             <p>Bind with Google</p>
                         </button>
                     </div>
                     <ng-template #unbindGoogleButton>
-                        <button class="social-button google-button" (click)="googleUnbind()">
+                        <button type="button" class="social-button google-button" (click)="googleUnbind()">
                             <i class="fab fa-google"></i>
                             <p>Unbind</p>
                         </button>
                     </ng-template>
                     <label for="facebook-button">Facebook:</label>
                     <div *ngIf="facebookBinded === 'false'; else unbindFacebookButton">
-                        <button class="social-button facebook-button" (click)="facebookBind()">
+                        <button type="button" class="social-button facebook-button" (click)="facebookBind()">
                             <i class="fab fa-facebook-f"></i>
                             <p>Bind with Facebook</p>
                         </button>
                     </div>
                     <ng-template #unbindFacebookButton>
-                        <button class="social-button facebook-button" (click)="facebookUnbind()">
+                        <button type="button" class="social-button facebook-button" (click)="facebookUnbind()">
                             <i class="fab fa-facebook-f"></i>
                             <p>Unbind</p>
                         </button>

@@ -1,0 +1,88 @@
+<div class="wrapper">
+    <form>
+        <div *ngIf="userIsAdmin">
+            <mat-form-field appearance="fill">
+                <mat-label>Teacher</mat-label>
+                <mat-select [(ngModel)]="selectedTeacher" name="teacher name">
+                    <mat-option *ngFor="let teacher of teachers" [value]="teacher.username">
+                        {{teacher.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="!userIsAdmin">
+            <label for="teacher">Teacher:</label>
+            <div>
+                <input name="teacher" readonly [(ngModel)]="selectedTeacher">
+            </div>
+        </div>
+        <div>
+            <label for="class-name">Class name:</label>
+            <div>
+                <input type="text" [(ngModel)]="class" name="class" placeholder="Class name" class="class-name">
+            </div>
+        </div>
+        <div>
+            <label>Days:</label>
+            <div class="day">
+                <input type="checkbox" name="monday" [(ngModel)]="week[0]">
+                <label for="monday" [ngClass]="{'not-checked': monday === false}">Monday</label>
+                <div *ngIf="week[0]">
+                    <input [owlDateTime]="dt1" selectMode="range" [owlDateTimeTrigger]="dt1" placeholder="Schedule time" [(ngModel)]="weekTime[0]" name="mondayTime">
+                    <owl-date-time #dt1 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+            <div class="day">
+                <input type="checkbox" name="tuesday" [(ngModel)]="week[1]">
+                <label for="Tuesday" [ngClass]="{'not-checked': tuesday === false}">Tuesday</label>
+                <div *ngIf="week[1]">
+                    <input [owlDateTime]="dt2" selectMode="range" [owlDateTimeTrigger]="dt2" placeholder="Schedule time" [(ngModel)]="weekTime[1]" name="tuesdayTime">
+                    <owl-date-time #dt2 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+            <div class="day">
+                <input type="checkbox" name="wednesday" [(ngModel)]="week[2]">
+                <label for="wednesday" [ngClass]="{'not-checked': wednesday === false}">Wednesday</label>
+                <div *ngIf="week[2]">
+                    <input [owlDateTime]="dt3" selectMode="range" [owlDateTimeTrigger]="dt3" placeholder="Schedule time" [(ngModel)]="weekTime[2]" name="wednesdayTime">
+                    <owl-date-time #dt3 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+            <div class="day">
+                <input type="checkbox" name="thursday" [(ngModel)]="week[3]">
+                <label for="thursday" [ngClass]="{'not-checked': thursday === false}">Thursday</label>
+                <div *ngIf="week[3]">
+                    <input [owlDateTime]="dt4" selectMode="range" [owlDateTimeTrigger]="dt4" placeholder="Schedule time" [(ngModel)]="weekTime[3]" name="thursdayTime">
+                    <owl-date-time #dt4 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+            <div class="day">
+                <input type="checkbox" name="friday" [(ngModel)]="week[4]">
+                <label for="friday" [ngClass]="{'not-checked': friday === false}">Friday</label>
+                <div *ngIf="week[4]">
+                    <input [owlDateTime]="dt5" selectMode="range" [owlDateTimeTrigger]="dt5" placeholder="Schedule time" [(ngModel)]="weekTime[4]" name="fridayTime">
+                    <owl-date-time #dt5 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+            <div class="day">
+                <input type="checkbox" name="saturday" [(ngModel)]="week[5]">
+                <label for="saturday" [ngClass]="{'not-checked': saturday === false}">Saturday</label>
+                <div *ngIf="week[5]">
+                    <input [owlDateTime]="dt6" selectMode="range" [owlDateTimeTrigger]="dt6" placeholder="Schedule time" [(ngModel)]="weekTime[5]" name="saturdayTime">
+                    <owl-date-time #dt6 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+            <div class="div">
+                <input type="checkbox" name="sunday" [(ngModel)]="week[6]">
+                <label for="sunday" [ngClass]="{'not-checked': sunday === false}">Sunday</label>
+                <div *ngIf="week[6]">
+                    <input [owlDateTime]="dt7" selectMode="range" [owlDateTimeTrigger]="dt7" placeholder="Schedule time" [(ngModel)]="weekTime[6]" name="sundayTime">
+                    <owl-date-time #dt7 pickerType="timer"></owl-date-time>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="action-panel" (click)="onSubmit()">
+        <button type="button">Submit</button>
+    </div>
+</div>

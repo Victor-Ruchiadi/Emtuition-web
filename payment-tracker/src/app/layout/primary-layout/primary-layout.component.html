@@ -8,23 +8,35 @@
                 </a>
             </div>
             <div class="menus">
-                <div class="student-menu menu">
+                <div *ngIf="studentRoute" class="student-menu menu">
                     <i class="fas fa-users"></i>
-                    <p class="desc">
-                        Student
-                    </p>
+                    <a (click)="toStudentsRoute()" class="desc">
+                        Students
+                    </a>
                 </div>
-                <div class="payment-menu menu">
+                <div *ngIf="paymentRoute" class="payment-menu menu">
                     <i class="far fa-credit-card"></i>
-                    <p class="desc">
+                    <a (click)="toPaymentRoute()" class="desc">
                         Payment
-                    </p>
+                    </a>
                 </div>
-                <div class="report-menu menu">
+                <div *ngIf="reportRoute" class="report-menu menu">
                     <i class="fas fa-chart-line"></i>
-                    <p class="desc">
+                    <a (click)="toReportRoute()" class="desc">
                         Report
-                    </p>
+                    </a>
+                </div>
+                <div *ngIf="teacherRoute" class="teacher-menu menu">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <a (click)="toTeacherRoute()" class="desc">
+                        Teachers
+                    </a>
+                </div>
+                <div *ngIf="classRoute" class="teacher-menu menu">
+                    <i class="fas fa-school"></i>
+                    <a (click)="toClassRoute()" class="desc">
+                        Classes
+                    </a>
                 </div>
             </div>
         </div>
@@ -45,7 +57,7 @@
                     <div class="profile-picture">
                         <img src="../../../../../assets/profile/default.jpeg" alt="pfp">
                     </div>
-                    <p>Username</p>
+                    <p>{{ username }}</p>
                 </div>
                 <div class="dropdown" [ngStyle]="{'display':dropdownAppear === true ? 'block' : 'none'}">
                     <div class="menu">

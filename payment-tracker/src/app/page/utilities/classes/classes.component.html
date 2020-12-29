@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="search-container">
+        <label for="search-text">Search Text:</label>
+        <div>
+            <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Search by name" name="searchText">
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Class</th>
+                <th *ngIf="canUpdate">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let class of classes | filter:searchText; let i = index;">
+                <th>{{ i + 1 }}</th>
+                <td>{{ class.name }}</td>
+                <td *ngIf="canUpdate">
+                    <a [routerLink]="['/home/classes', class.id]"><button class="edit-btn">EDIT</button></a>
+                    <button class="delete-btn" (click)="deleteClass(i + 1)">DELETE</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="action-panel">
+        <a routerLink="/home/classes/add"><button class="add-btn">Add class</button></a>
+    </div>
+</div>

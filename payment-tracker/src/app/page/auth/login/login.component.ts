@@ -12,8 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   inputType = 'password';
   passwordAppear = true;
-  username = 'victor';
-  password = 'Spin1043';
+  username = 'teacher';
+  password = '123456';
 
   constructor(private authService: AuthService, private router: Router, private socialAuthService: SocialAuthService) { }
 
@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
     if (this.validate()) {
       this.authService.login(this.username, this.password).subscribe(
         (res) => {
-          this.storeToken(res.token, res.username, res.google, res.facebook);
+          console.log(res);
+          this.storeToken(res.token, res.username, res.google, res.facebook, JSON.stringify(res.permissions));
           this.router.navigate(['/home']);
         }, (err) => {
           console.log('ERROR');
@@ -58,21 +59,24 @@ export class LoginComponent implements OnInit {
     return valid;
   }
 
-  storeToken(token, username, google, facebook): void {
+  storeToken(token, username, google, facebook, permissions): void {
     if (!localStorage.getItem('token') || !localStorage.getItem('username')) {
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
       localStorage.setItem('google', google);
       localStorage.setItem('facebook', facebook);
+      localStorage.setItem('permissions', permissions);
     } else {
       localStorage.removeItem('token');
       localStorage.removeItem('username');
       localStorage.removeItem('google');
       localStorage.removeItem('facebook');
+      localStorage.removeItem('permissions');
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
       localStorage.setItem('google', google);
       localStorage.setItem('facebook', facebook);
+      localStorage.setItem('permissions', permissions);
     }
   }
 
@@ -84,7 +88,7 @@ export class LoginComponent implements OnInit {
             if (result.type === 'error') {
               this.signOut();
             } else {
-              this.storeToken(result.token, result.username, result.google, result.facebook);
+              this.storeToken(result.token, result.username, result.google, result.facebook, JSON.stringify(result.permissions));
               this.router.navigate(['/home']);
               this.signOut();
             }
@@ -108,7 +112,7 @@ export class LoginComponent implements OnInit {
             if (result.type === 'error') {
               this.signOut();
             } else {
-              this.storeToken(result.token, result.username, result.google, result.facebook);
+              this.storeToken(result.token, result.username, result.google, result.facebook, JSON.stringify(result.permissions));
               this.router.navigate(['/home']);
               this.signOut();
             }

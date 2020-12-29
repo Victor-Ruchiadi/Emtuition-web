@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" [(ngModel)]="username" name="username" id="username">
+        <label for="password">Password:</label>
+        <input type="{{ inputType }}" [(ngModel)]="password" name="password" id="password">
+        <i class="fas" (click)="changeType()" [ngClass]="{
+                        'fa-eye': passwordAppear === true,
+                        'fa-eye-slash': passwordAppear === false
+        }"></i>
+    </form>
+    <div class="action-panel">
+        <button type="button" (click)="onSubmit()">Submit</button>
+    </div>
+</div>

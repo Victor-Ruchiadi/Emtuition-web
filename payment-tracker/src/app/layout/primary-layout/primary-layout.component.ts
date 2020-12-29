@@ -17,6 +17,13 @@ export class PrimaryLayoutComponent implements OnInit{
 
   sidebarAppear = false;
 
+  studentRoute = false;
+  paymentRoute = false;
+  reportRoute = false;
+  teacherRoute = false;
+  classRoute = false;
+
+  permissions = JSON.parse(localStorage.getItem('permissions'));
 
   infoColor = '#62bfe3';
   successColor = '#68bb91';
@@ -32,10 +39,13 @@ export class PrimaryLayoutComponent implements OnInit{
   onPageNotifBgColor = '';
   onPageNotifText = '';
 
+  username = localStorage.getItem('username');
+
   constructor(
     private envelopeService: EnvelopeService,
     private onPageNotificationService: OnPageNotificationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +61,25 @@ export class PrimaryLayoutComponent implements OnInit{
       this.onPageNotifBgColor = this.checkColor(data.color);
       this.onPageNotifText = data.text;
     });
+    if (this.permissions) {
+      this.permissions.forEach(v => {
+        if (v.permission_id === 1) {
+          this.studentRoute = true;
+        }
+        if (v.permission_id === 2) {
+          this.paymentRoute = true;
+        }
+        if (v.permission_id === 3) {
+          this.reportRoute = true;
+        }
+        if (v.permission_id === 4) {
+          this.teacherRoute = true;
+        }
+        if (v.permission_id === 5) {
+          this.classRoute = true;
+        }
+      });
+    }
   }
 
   checkColor(notifColor): string {
@@ -74,5 +103,35 @@ export class PrimaryLayoutComponent implements OnInit{
   logOut(): void {
     this.dropdownAppear = !this.dropdownAppear;
     this.authService.logOut();
+  }
+
+  toStudentsRoute(): void {
+    this.router.navigate(['home/students']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  toPaymentRoute(): void {
+    this.router.navigate(['home/payment']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  toReportRoute(): void {
+    this.router.navigate(['home/report']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  toTeacherRoute(): void {
+    this.router.navigate(['home/teachers']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  toClassRoute(): void {
+    this.router.navigate(['home/classes']).then(() => {
+      window.location.reload();
+    });
   }
 }

@@ -101,6 +101,7 @@ form {
     color: #F8F8F6;
     border: 0;
     border-radius: 25px;
+    font-weight: 400;
 }
 
 .login-btn:focus {
@@ -117,6 +118,7 @@ form {
 
 .btnText {
     display: inline-block;
+    text-transform: uppercase;
 }
 
 button i {

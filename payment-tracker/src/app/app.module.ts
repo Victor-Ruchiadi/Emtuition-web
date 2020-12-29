@@ -17,6 +17,23 @@ import { FormsModule } from '@angular/forms';
 import { SettingsComponent } from './page/utilities/settings/settings.component';
 import { TokenInterceptor } from './middleware/token.interceptor';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { StudentsComponent } from './page/utilities/students/students.component';
+import { PaymentComponent } from './page/utilities/payment/payment.component';
+import { ReportComponent } from './page/utilities/report/report.component';
+import { TeacherComponent } from './page/utilities/teacher/teacher.component';
+import { TeacherEditComponent } from './page/utilities/teacher-edit/teacher-edit.component';
+import { StudentsEditComponent } from './page/utilities/students-edit/students-edit.component';
+import { ClassesComponent } from './page/utilities/classes/classes.component';
+import { ClassesAddComponent } from './page/utilities/classes-add/classes-add.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { ClassesEditComponent } from './page/utilities/classes-edit/classes-edit.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { StudentsAddComponent } from './page/utilities/students-add/students-add.component';
+import { TeacherAddComponent } from './page/utilities/teacher-add/teacher-add.component';
+import { IgxExcelModule } from 'igniteui-angular-excel';
+import { IgxSpreadsheetModule } from 'igniteui-angular-spreadsheet';
 
 @NgModule({
   declarations: [
@@ -27,7 +44,18 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
     SidebarComponent,
     HeaderComponent,
     NotFoundPageComponent,
-    SettingsComponent
+    SettingsComponent,
+    StudentsComponent,
+    PaymentComponent,
+    ReportComponent,
+    TeacherComponent,
+    TeacherEditComponent,
+    StudentsEditComponent,
+    ClassesComponent,
+    ClassesAddComponent,
+    ClassesEditComponent,
+    StudentsAddComponent,
+    TeacherAddComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +65,16 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
     CommonModule,
     RouterModule,
     FormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    Ng2SearchPipeModule,
+    IgxExcelModule,
+    IgxSpreadsheetModule
+    // NgxDocViewerModule,
+    // DocumentViewModule
   ],
   providers: [
     {

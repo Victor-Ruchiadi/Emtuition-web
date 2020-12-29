@@ -60,6 +60,7 @@ export class AuthService {
         localStorage.removeItem('username');
         localStorage.removeItem('google');
         localStorage.removeItem('facebook');
+        localStorage.removeItem('permissions');
         this.router.navigate(['/login']);
     }
 
@@ -75,5 +76,105 @@ export class AuthService {
             email: emailAddress
         };
         return this.http.post(`${this.endpoint}/api/facebook/login`, this.data);
+    }
+
+    checkPermission(): any {
+        return this.http.post(`${this.endpoint}/api/permission/check`, this.data);
+    }
+
+    getAllTeachers(): any {
+        return this.http.post(`${this.endpoint}/api/teachers/list`, this.data);
+    }
+
+    deleteTeacher(index): any {
+        this.data = {
+            id: +index
+        };
+        return this.http.post(`${this.endpoint}/api/teachers/delete`, this.data);
+    }
+
+    getStudentById(index): any {
+        this.data = {
+            id: +index
+        };
+        return this.http.post(`${this.endpoint}/api/students/id`, this.data);
+    }
+
+    changeStudentsData(index, user, pass): any {
+        this.data = {
+            id: +index,
+            username: user,
+            password: pass
+        };
+        return this.http.post(`${this.endpoint}/api/students/data/change`, this.data);
+    }
+
+    getAllStudents(): any {
+        return this.http.post(`${this.endpoint}/api/students/list`, this.data);
+    }
+
+    deleteStudent(index): any {
+        this.data = {
+            id: +index
+        };
+        return this.http.post(`${this.endpoint}/api/students/delete`, this.data);
+    }
+
+    getTeacherById(index): any {
+        this.data = {
+            id: +index
+        };
+        return this.http.post(`${this.endpoint}/api/teachers/id`, this.data);
+    }
+
+    changeTeacherData(index, user, pass): any {
+        this.data = {
+            id: +index,
+            username: user,
+            password: pass
+        };
+        return this.http.post(`${this.endpoint}/api/teachers/data/change`, this.data);
+    }
+
+    getAllClasses(): any {
+        return this.http.post(`${this.endpoint}/api/classes/list`, this.data);
+    }
+
+    addClass(obj): any {
+        return this.http.post(`${this.endpoint}/api/classes/add`, obj);
+    }
+
+    getClassById(index): any {
+        this.data = {
+            id: +index
+        };
+        return this.http.post(`${this.endpoint}/api/classes/id`, this.data);
+    }
+
+    changeClassData(obj): any {
+        return this.http.post(`${this.endpoint}/api/classes/data/change`, obj);
+    }
+
+    deleteClass(index): any {
+        this.data = {
+            id: +index
+        };
+        return this.http.post(`${this.endpoint}/api/classes/delete`, this.data);
+    }
+
+    addStudent(user, pass): any {
+        this.data = {
+            username: user,
+            password: pass
+        };
+        return this.http.post(`${this.endpoint}/api/students/add`, this.data);
+    }
+
+    addTeacher(user, pass): any {
+        this.data = {
+            username: user,
+            password: pass
+        };
+        return this.http.post(`${this.endpoint}/api/teachers/add`, this.data);
     }
 }

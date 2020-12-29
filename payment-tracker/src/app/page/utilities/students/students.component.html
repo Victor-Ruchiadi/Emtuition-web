@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="search-container">
+        <label for="search-text">Search Text:</label>
+        <div>
+            <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Search by name" name="searchText">
+        </div>
+    </div>
+    <igx-spreadsheet #spreadsheet height="600px" width="90%" style="margin: 0 auto; padding: 10px;">
+    </igx-spreadsheet>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Student</th>
+                <th *ngIf="canUpdate">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students | filter:searchText;; let i = index;">
+                <th>{{ i + 1 }}</th>
+                <td>{{ student.username }}</td>
+                <td *ngIf="canUpdate">
+                    <a [routerLink]="['/home/students', student.id]"><button class="edit-btn">EDIT</button></a>
+                    <button class="delete-btn" (click)="deleteStudent(i)">DELETE</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="action-panel">
+        <a routerLink="/home/students/add"><button class="add-btn">Add student</button></a>
+    </div>
+</div>
