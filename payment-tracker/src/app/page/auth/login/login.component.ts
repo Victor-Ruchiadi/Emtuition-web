@@ -12,8 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   inputType = 'password';
   passwordAppear = true;
-  username = 'teacher';
-  password = '123456';
+  username = 'victor';
+  password = 'Spin1043';
 
   constructor(private authService: AuthService, private router: Router, private socialAuthService: SocialAuthService) { }
 

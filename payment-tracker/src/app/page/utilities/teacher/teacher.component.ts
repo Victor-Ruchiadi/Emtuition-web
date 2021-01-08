@@ -12,6 +12,8 @@ export class TeacherComponent implements OnInit {
   searchText = '';
   teachers = [];
   canUpdate = false;
+  canDelete = false;
+  canCreate = false;
   permissions = JSON.parse(localStorage.getItem('permissions'));
 
   constructor(private authService: AuthService) { }
@@ -34,8 +36,14 @@ export class TeacherComponent implements OnInit {
     );
     if (this.permissions) {
       this.permissions.forEach(v => {
-        if (v.permission_id === 1 && v.can_update === true) {
+        if (v.permission_id === 4 && v.can_update === true) {
           this.canUpdate = true;
+        }
+        if (v.permission_id === 4 && v.can_delete === true) {
+          this.canDelete = true;
+        }
+        if (v.permission_id === 4 && v.can_update === true) {
+          this.canCreate = true;
         }
       });
     }

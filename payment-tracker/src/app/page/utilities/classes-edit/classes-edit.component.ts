@@ -95,8 +95,10 @@ export class ClassesEditComponent implements OnInit {
 
     this.authService.getClassById(this.classId).subscribe(
       (res) => {
+        console.log(res);
         this.teachers.forEach(v => {
-          if (v.id === res._id) {
+          console.log(v);
+          if (v.id === res.teacher_id) {
             console.log(v.username);
             this.selectedTeacher = v.username;
             console.log(v.id);

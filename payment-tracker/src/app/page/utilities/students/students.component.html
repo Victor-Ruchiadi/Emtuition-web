@@ -5,7 +5,7 @@
             <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Search by name" name="searchText">
         </div>
     </div>
-    <igx-spreadsheet #spreadsheet height="600px" width="90%" style="margin: 0 auto; padding: 10px;">
+    <igx-spreadsheet #spreadsheet height="550px" width="90%" style="margin: 0 auto; padding: 10px;">
     </igx-spreadsheet>
     <table class="table">
         <thead>
@@ -21,12 +21,12 @@
                 <td>{{ student.username }}</td>
                 <td *ngIf="canUpdate">
                     <a [routerLink]="['/home/students', student.id]"><button class="edit-btn">EDIT</button></a>
-                    <button class="delete-btn" (click)="deleteStudent(i)">DELETE</button>
+                    <button *ngIf="canDelete" class="delete-btn" (click)="deleteStudent(i)">DELETE</button>
                 </td>
             </tr>
         </tbody>
     </table>
     <div class="action-panel">
-        <a routerLink="/home/students/add"><button class="add-btn">Add student</button></a>
+        <a *ngIf="canCreate" routerLink="/home/students/add"><button class="add-btn">Add student</button></a>
     </div>
 </div>

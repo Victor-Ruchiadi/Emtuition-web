@@ -33,6 +33,7 @@
         "igniteui-angular-core": "^11.1.0",
         "igniteui-angular-excel": "^11.1.0",
         "igniteui-angular-spreadsheet": "^11.1.0",
+        "lodash": "^4.17.20",
         "ng-pick-datetime": "^7.0.0",
         "ng2-search-filter": "^0.5.1",
         "ngx-doc-viewer": "^1.4.0",

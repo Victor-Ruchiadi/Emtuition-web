@@ -23,7 +23,7 @@ import { ReportComponent } from './page/utilities/report/report.component';
 import { TeacherComponent } from './page/utilities/teacher/teacher.component';
 import { TeacherEditComponent } from './page/utilities/teacher-edit/teacher-edit.component';
 import { StudentsEditComponent } from './page/utilities/students-edit/students-edit.component';
-import { ClassesComponent } from './page/utilities/classes/classes.component';
+import { ClassesComponent, TooltipListPipe } from './page/utilities/classes/classes.component';
 import { ClassesAddComponent } from './page/utilities/classes-add/classes-add.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +34,8 @@ import { StudentsAddComponent } from './page/utilities/students-add/students-add
 import { TeacherAddComponent } from './page/utilities/teacher-add/teacher-add.component';
 import { IgxExcelModule } from 'igniteui-angular-excel';
 import { IgxSpreadsheetModule } from 'igniteui-angular-spreadsheet';
+import { ClassesAddStudentsComponent } from './page/utilities/classes-add-students/classes-add-students.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { IgxSpreadsheetModule } from 'igniteui-angular-spreadsheet';
     ClassesAddComponent,
     ClassesEditComponent,
     StudentsAddComponent,
-    TeacherAddComponent
+    TeacherAddComponent,
+    ClassesAddStudentsComponent,
+    TooltipListPipe
   ],
   imports: [
     BrowserModule,
@@ -72,9 +76,8 @@ import { IgxSpreadsheetModule } from 'igniteui-angular-spreadsheet';
     MatSelectModule,
     Ng2SearchPipeModule,
     IgxExcelModule,
-    IgxSpreadsheetModule
-    // NgxDocViewerModule,
-    // DocumentViewModule
+    IgxSpreadsheetModule,
+    MatTooltipModule
   ],
   providers: [
     {

@@ -136,7 +136,10 @@ export class AuthService {
         return this.http.post(`${this.endpoint}/api/teachers/data/change`, this.data);
     }
 
-    getAllClasses(): any {
+    getAllClasses(user): any {
+        this.data = {
+            teacher: user
+        };
         return this.http.post(`${this.endpoint}/api/classes/list`, this.data);
     }
 
@@ -176,5 +179,16 @@ export class AuthService {
             password: pass
         };
         return this.http.post(`${this.endpoint}/api/teachers/add`, this.data);
+    }
+
+    getClassInfo(index): any {
+        this.data = {
+            class: +index
+        };
+        return this.http.post(`${this.endpoint}/api/classes/students`, this.data);
+    }
+
+    changeClassStudentStatus(obj): any {
+        return this.http.post(`${this.endpoint}/api/classes/students/change`, obj);
     }
 }

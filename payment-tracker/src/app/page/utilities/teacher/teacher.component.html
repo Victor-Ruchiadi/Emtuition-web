@@ -19,12 +19,12 @@
                 <td>{{ teacher.username }}</td>
                 <td *ngIf="canUpdate">
                     <a [routerLink]="['/home/teachers', teacher.id]"><button class="edit-btn">EDIT</button></a>
-                    <button class="delete-btn" (click)="deleteTeacher(i)">DELETE</button>
+                    <button *ngIf="canDelete" class="delete-btn" (click)="deleteTeacher(i)">DELETE</button>
                 </td>
             </tr>
         </tbody>
     </table>
     <div class="action-panel">
-        <a routerLink="/home/teachers/add"><button class="add-btn">Add teacher</button></a>
+        <a *ngIf="canCreate" routerLink="/home/teachers/add"><button class="add-btn">Add teacher</button></a>
     </div>
 </div>

@@ -16,6 +16,7 @@ import { ClassesAddComponent } from './page/utilities/classes-add/classes-add.co
 import { ClassesEditComponent } from './page/utilities/classes-edit/classes-edit.component';
 import { TeacherAddComponent } from './page/utilities/teacher-add/teacher-add.component';
 import { StudentsAddComponent } from './page/utilities/students-add/students-add.component';
+import { ClassesAddStudentsComponent } from './page/utilities/classes-add-students/classes-add-students.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     { path: 'teachers/:id', component: TeacherEditComponent },
     { path: 'classes', component: ClassesComponent },
     { path: 'classes/add', component: ClassesAddComponent },
-    { path: 'classes/:id', component: ClassesEditComponent }
+    { path: 'classes/:id', component: ClassesEditComponent },
+    { path: 'classes/add/students/:id', component: ClassesAddStudentsComponent }
   ]},
   { path: '**', component: NotFoundPageComponent, canActivate: [AuthGuard] }
 ];

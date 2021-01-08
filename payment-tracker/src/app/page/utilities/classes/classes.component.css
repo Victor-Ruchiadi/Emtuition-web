@@ -53,6 +53,15 @@ button {
     background-color: #ffe57f;
 }
 
+.add-students-btn {
+    background-color: #576cc3;
+    /* font-size: medium; */
+}
+
+.add-students-btn:hover {
+    background-color: #abb5e1;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -89,6 +98,38 @@ a:visited {
 .search-container input {
     padding: 2px 5px;
     width: 400px
+}
+
+table tbody tr .student-td {
+    text-align: center;
+    padding-left: 0;
+}
+
+.select {
+    margin-left: 20px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+    border-radius: 5px;
+}
+
+::ng-deep .mat-option-text {
+    color: black;
+}
+
+::ng-deep .mat-form-field-label {
+    color: black;
+    /* color: rgba(0, 0, 0, 0); */
+}
+
+::ng-deep .tooltip-list {
+    font-size: medium;
 }
 
 @media (min-width: 1200px) {

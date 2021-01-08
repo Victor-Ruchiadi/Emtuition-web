@@ -1,0 +1,71 @@
+<div class="wrapper">
+    <form>
+        <div class="table-wrapper">
+            <table class="table-1">
+                <thead>
+                    <tr>
+                        <td colspan="3">
+                            <label for="search-text">Search Text:</label>
+                            <div>
+                                <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText1" placeholder="Search by name" name="searchText1">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="3">AVAILABLE STUDENTS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>#</th>
+                        <th>NAME</th>
+                        <th>ACTION</th>
+                    </tr>
+                    <tr *ngFor="let student of availableStudents | filter:searchText1; let i = index;">
+                        <th>{{ i + 1 }}</th>
+                        <td>{{ student.username }}</td>
+                        <td>
+                            <button class="add-btn" (click)="changeToAdded(i)">
+                                <i class="fas fa-user-plus" style="border: none;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table-2">
+                <thead>
+                    <tr>
+                        <td colspan="3">
+                            <label for="search-text">Search Text:</label>
+                            <div>
+                                <input type="text" class="form-control" id="search-text2" [(ngModel)]="searchText2" placeholder="Search by name" name="searchText2">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="3">ADDED STUDENTS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>#</th>
+                        <th>NAME</th>
+                        <th>ACTION</th>
+                    </tr>
+                    <tr *ngFor="let student of addedStudents | filter:searchText2; let i = index;">
+                        <th>{{ i + 1 }}</th>
+                        <td>{{ student.username }}</td>
+                        <td>
+                            <button class="minus-btn" (click)="changeToAvailable(i)">
+                                <i class="fas fa-user-minus" style="border: none;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div class="action-panel" (click)="onSubmit()">
+        <button class="submit-button" type="button">Submit</button>
+    </div>
+</div>

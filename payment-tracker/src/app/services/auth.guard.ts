@@ -124,6 +124,16 @@ export class AuthGuard implements CanActivate {
                         return true;
                     }
                 }
+                if (permissions[i].permission_id === 5 &&
+                    permissions[i].can_update === true
+                ) {
+                    const pathArray = window.location.pathname.split('/');
+                    const classId = pathArray[5];
+                    if (window.location.pathname === '/home/classes/add/students/' + classId) {
+                        permit = true;
+                        return true;
+                    }
+                }
             }
             if (!permit) {
                 this.router.navigate(['/home']);
