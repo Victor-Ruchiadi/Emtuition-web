@@ -1,0 +1,53 @@
+<div class="modal-wrapper" *ngIf="userPaymentModalActivated" (click)="onCloseModal()">
+    <div class="modal" [ngClass]="{'lighter': userPaymentModalActivated === true}" (click)="onOpenModal($event)" ng-click="$event.stopPropagation()">
+        <div class="modal-header">
+            Student Payment Settings
+        </div>
+        <div class="modal-content">
+            <div class="select">
+                <mat-form-field appearance="fill">
+                    <mat-label>Student</mat-label>
+                    <mat-select [(ngModel)]="selectedStudent" name="students-name" (selectionChange)="onSelectionChange($event)">
+                        <mat-option *ngFor="let student of students" [value]="student.username">
+                            {{student.username}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Class</th>
+                        <th *ngIf="lastAmountAppear">Last Amount</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payment of payments; let i = index">
+                        <th>{{ i + 1 }}</th>
+                        <td class="class">{{ payment.class }}</td>
+                        <td *ngIf="lastAmountAppear" class="amount">{{ payment.lastAmount ? (payment.lastAmount|currency:'IDR') : '-'}}</td>
+                        <td *ngIf="!update[i]" class="amount">{{ payment.amount| currency:"IDR" }}</td>
+                        <td *ngIf="update[i]" class="amount">
+                            <input step="5000" type="number" [(ngModel)]="payment.inputAmount" name="class">
+                        </td>
+                        <td>
+                            <div *ngIf="!update[i]">
+                                <button class="update-btn" (click)="update[i] = true; payments[i].inputAmount = payments[i].amount">EDIT</button>
+                            </div>
+                            <div *ngIf="update[i]">
+                                <button class="cancel-btn" (click)="update[i] = false">CANCEL</button>
+                                <button class="update-btn" (click)="onUpdate(i)">UPDATE</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer ">
+            <button (click)="onCloseModal() ">CLOSE</button>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,7 @@
+<!-- <app-user-payment-modal *ngIf="userPaymentModalActivated"></app-user-payment-modal> -->
 <div class="wrapper" [ngClass]="{'hidden': sidebarAppear === false, 'full': sidebarAppear === true}">
-    <div class="sidebar" [ngClass]="{'slide': sidebarAppear === true}">
+    <!-- <app-user-payment-modal *ngIf="userPaymentModalActivated" style="width: 100vw; height: 100vh;" class="darker"></app-user-payment-modal> -->
+    <div class="sidebar" [ngClass]="{'slide': sidebarAppear === true, 'darker': userPaymentModalActivated === true}" (click)="onCloseModal()">
         <!-- <app-sidebar></app-sidebar> -->
         <div class="wrapper">
             <div class="title">
@@ -42,8 +44,10 @@
         </div>
     </div>
     <div class="main">
-        <div class="header">
-            <div class="wrapper">
+        <div class="header" [ngStyle]="{'padding-right':userPaymentModalActivated === true ? '200px' : '0px'}" [ngClass]="{'darker': userPaymentModalActivated === true}" (click)="onCloseModal()">
+            <div class="wrapper" [ngClass]="{'smaller-wrapper': sidebarAppear === true, 'wrapper': sidebarAppear === false}">
+                <!-- <div class="wrapper" [ngClass]="{'smaller-wrapper': sidebarAppear === true, 'wrapper': sidebarAppear === false}"> -->
+                <!-- <div class="no-touch" *ngIf="userPaymentModalActivated" (click)="userPaymentModalActivated = !userPaymentModalActivated"></div> -->
                 <div class="tools">
                     <!-- THIS WILL BE TOOLS -->
                     <div class="menu-toggle">
@@ -59,23 +63,36 @@
                     </div>
                     <p>{{ username }}</p>
                 </div>
-                <div class="dropdown" [ngStyle]="{'display':dropdownAppear === true ? 'block' : 'none'}">
-                    <div class="menu">
-                        <i class="fas fa-cog"></i>
-                        <a routerLink="/home/settings" (click)="dropdownAppear = !dropdownAppear">Settings</a>
-                    </div>
-                    <div class="menu">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <a (click)="logOut()">Log out</a>
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div class="dropdown" *ngIf="dropdownAppear" [ngClass]="{'slide': sidebarAppear === true, 'darker': userPaymentModalActivated === true}">
+            <!-- <div class="dropdown" [ngStyle]="{'margin-left':dropdownAppear === true ? '0' : '200px'}"> -->
+            <div class="menu">
+                <i class="fas fa-cog"></i>
+                <a routerLink="/home/settings" (click)="dropdownAppear = !dropdownAppear">Settings</a>
+            </div>
+            <div class="menu">
+                <i class="fas fa-sign-out-alt"></i>
+                <a (click)="logOut()">Log out</a>
             </div>
         </div>
         <div class="content">
-            <div class="notif" *ngIf="onPageNotifActivated" [ngStyle]="{'background-color': onPageNotifBgColor}">{{ onPageNotifText }}</div>
-            <div class="envelope" *ngIf="envActivated" [ngStyle]="{'background-color': envBgColor}">{{ envText }}</div>
-            <router-outlet></router-outlet>
+            <div class="notif" *ngIf="onPageNotifActivated" [ngClass]="{'darker': userPaymentModalActivated === true}" [ngStyle]="{'background-color': onPageNotifBgColor}">
+                <div class="text">
+                    {{ onPageNotifText }}
+                </div>
+            </div>
+            <div class="envelope" *ngIf="envActivated" [ngClass]="{'darker': userPaymentModalActivated === true}">
+                <div class="text">
+                    {{ envText }}
+                </div>
+            </div>
+            <app-user-payment-modal></app-user-payment-modal>
+            <router-outlet style="overflow: scroll;"></router-outlet>
         </div>
     </div>
-    <div class="copyright">Copyright &copy; Victor Ruchiadi</div>
+    <div class="copyright" [ngClass]="{'darker': userPaymentModalActivated === true}" (click)="onCloseModal()">
+        Copyright &copy; Victor Ruchiadi 2020-{{ year }}
+        <!-- <div class="no-touch" [ngClass]="{'darker': userPaymentModalActivated === true}" *ngIf="userPaymentModalActivated" (click)="userPaymentModalActivated = !userPaymentModalActivated"></div> -->
+    </div>
 </div>

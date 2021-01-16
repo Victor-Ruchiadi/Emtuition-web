@@ -1,0 +1,150 @@
+.modal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    background-color: transparent;
+}
+
+.modal {
+    width: 60vw;
+    height: 80vh;
+    background-color: white;
+    position: fixed;
+    overflow: hidden;
+    left: 20vw;
+    top: 10vh;
+    /* margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw; */
+}
+
+ ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+    border-radius: 5px;
+}
+
+ ::ng-deep .mat-option-text {
+    color: black;
+}
+
+ ::ng-deep .mat-form-field-label {
+    color: black;
+    /* color: rgba(0, 0, 0, 0); */
+}
+
+.darker {
+    filter: brightness(50%);
+    overflow: hidden;
+    /* pointer-events: none; */
+}
+
+.darker * {
+    pointer-events: none;
+}
+
+.lighter {
+    filter: brightness(100%) !important;
+}
+
+.content {
+    color: black;
+}
+
+.modal .modal-header {
+    width: 100%;
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+    background: #425CB7;
+    /* background: repeating-linear-gradient(45deg, #425CB7, transparent 150px); */
+}
+
+.amount {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.class {
+    padding-left: 10px;
+}
+
+table {
+    width: 90%;
+    margin: 5px auto;
+    height: fit-content;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-spacing: 0;
+    /* border: 1px solid; */
+    border-collapse: collapse;
+    overflow: scroll;
+}
+
+th,
+td {
+    border: 1px solid;
+    margin: 0 auto;
+}
+
+.select {
+    padding: 20px;
+}
+
+.modal-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: grid;
+}
+
+.modal-footer button {
+    align-items: center;
+    padding: 0;
+    background: #f55a4e;
+    outline: 0;
+    border: 0;
+    color: white;
+}
+
+.modal-footer button:hover {
+    background-color: #faaca6;
+}
+
+table button {
+    font-size: 18px;
+    margin: 5px;
+    padding: 2px 0px;
+    width: 100px;
+    color: white;
+    border: 0;
+    display: inline-block;
+}
+
+.cancel-btn {
+    background-color: #f55a4e;
+}
+
+.cancel-btn:hover {
+    background-color: #faaca6;
+}
+
+.update-btn {
+    background-color: #ffcc00;
+}
+
+.update-btn:hover {
+    background-color: #ffe57f;
+}
+
+.modal-content {
+    overflow: scroll;
+}
+
+@media screen and (max-width: 992px) {
+    .modal {
+        width: 90vw;
+        left: 5vw;
+    }
+}

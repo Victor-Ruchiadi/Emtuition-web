@@ -1,1 +1,57 @@
-<p>payment works!</p>
+<div class="wrapper" [ngClass]="{'darker': userPaymentModalActivated === true}">
+    <div class="search-container">
+        <label for="search-text">Search Text:</label>
+        <div>
+            <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Search by name" name="searchText">
+        </div>
+    </div>
+    <table class="table" *ngIf="loaded">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Student</th>
+                <!-- <th *ngIf="lastAmountAppear">Last Amount</th> -->
+                <!-- <th>Amount</th> -->
+                <th *ngIf="canUpdate">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students | filter:searchText;; let i = index;">
+                <th>{{ i + 1 }}</th>
+                <td>{{ student.username }}</td>
+                <!-- <td *ngIf="lastAmountAppear" class="last-amount">
+                    {{ lastAmount[i] }}
+                </td>
+                <td>
+                    <div *ngIf="!update[i]" class="input-wrapper">
+                        <ul>
+                            <li *ngFor="let amount of displayAmount(payments[student.id])">
+                                <span>
+                                    {{ amount }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="update[i]" class="input-wrapper">
+                        <ul>
+                            <li *ngFor="let amount of paymentsInput[i]">
+                                <input class="number-input" step="5000" min="0" type="number" [(ngModel)]="amount.amount">
+                                <span style="display: inline-block;">{{ amount.class }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </td> -->
+                <td>
+                    <div *ngIf="!update[i]">
+                        <button class="update-btn" (click)="activateModal(i)">EDIT</button>
+                        <!-- <button class="update-btn" (click)="update[i] = true; inputValues[i] = values[i]">EDIT</button> -->
+                    </div>
+                    <!-- <div *ngIf="update[i]">
+                        <button class="cancel-btn" (click)="update[i] = false">CANCEL</button>
+                        <button class="update-btn" (click)="onUpdate(i)">UPDATE</button>
+                    </div> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

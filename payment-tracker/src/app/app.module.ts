@@ -36,6 +36,7 @@ import { IgxExcelModule } from 'igniteui-angular-excel';
 import { IgxSpreadsheetModule } from 'igniteui-angular-spreadsheet';
 import { ClassesAddStudentsComponent } from './page/utilities/classes-add-students/classes-add-students.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { UserPaymentModalComponent } from './modals/user-payment-modal/user-payment-modal.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     StudentsAddComponent,
     TeacherAddComponent,
     ClassesAddStudentsComponent,
-    TooltipListPipe
+    TooltipListPipe,
+    UserPaymentModalComponent
   ],
   imports: [
     BrowserModule,

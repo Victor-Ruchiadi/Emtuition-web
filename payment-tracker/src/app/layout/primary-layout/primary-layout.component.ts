@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { EnvelopeService } from 'src/app/services/envelope.service';
 import { OnPageNotificationService } from 'src/app/services/on-page-notification.service';
+import { UserPaymentService } from 'src/app/services/user-payment.service';
 import { HeaderComponent } from './components/header/header.component';
 
 @Component({
@@ -14,14 +16,20 @@ export class PrimaryLayoutComponent implements OnInit{
   @ViewChild(HeaderComponent) headerData;
 
   dropdownAppear = false;
+  d = new Date();
+  year = this.d.getFullYear();
 
+  student;
+  students = [];
+  classes = [];
+  payments = [];
   sidebarAppear = false;
-
   studentRoute = false;
   paymentRoute = false;
   reportRoute = false;
   teacherRoute = false;
   classRoute = false;
+  selectedStudent = '';
 
   permissions = JSON.parse(localStorage.getItem('permissions'));
 
@@ -38,17 +46,23 @@ export class PrimaryLayoutComponent implements OnInit{
   onPageNotifActivated = false;
   onPageNotifBgColor = '';
   onPageNotifText = '';
+  userPaymentModalActivated = false;
 
   username = localStorage.getItem('username');
 
   constructor(
     private envelopeService: EnvelopeService,
     private onPageNotificationService: OnPageNotificationService,
+    private userPaymentService: UserPaymentService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dataTransferService: DataTransferService
   ) { }
 
   ngOnInit(): void {
+    this.dataTransferService.activatedEmitter.subscribe(data => {
+      this.userPaymentModalActivated = data.modal;
+    });
     this.envelopeService.activatedEmitter.subscribe(data => {
       this.envActivated = data.status;
       // this.envBgColor = data.color;
@@ -60,6 +74,14 @@ export class PrimaryLayoutComponent implements OnInit{
       // this.onPageNotifBgColor = data.color;
       this.onPageNotifBgColor = this.checkColor(data.color);
       this.onPageNotifText = data.text;
+      // setTimeout(() => {
+      //   this.onPageNotifActivated = false;
+      // }, 10000);
+    });
+    this.userPaymentService.activatedEmitter.subscribe(data => {
+      console.log(data);
+      // this.sidebarAppear = false;
+      this.userPaymentModalActivated = data.status;
     });
     if (this.permissions) {
       this.permissions.forEach(v => {
@@ -106,32 +128,76 @@ export class PrimaryLayoutComponent implements OnInit{
   }
 
   toStudentsRoute(): void {
-    this.router.navigate(['home/students']).then(() => {
-      window.location.reload();
-    });
+    if (this.studentRoute) {
+      this.sidebarAppear = false;
+      this.router.navigate(['home/students']);
+    }
   }
 
   toPaymentRoute(): void {
-    this.router.navigate(['home/payment']).then(() => {
-      window.location.reload();
-    });
+    if (this.paymentRoute) {
+      this.sidebarAppear = false;
+      this.router.navigate(['home/payment']);
+    }
   }
 
   toReportRoute(): void {
-    this.router.navigate(['home/report']).then(() => {
-      window.location.reload();
-    });
+    if (this.reportRoute) {
+      this.sidebarAppear = false;
+      this.router.navigate(['home/report']);
+    }
   }
 
   toTeacherRoute(): void {
-    this.router.navigate(['home/teachers']).then(() => {
-      window.location.reload();
-    });
+    if (this.teacherRoute) {
+      this.sidebarAppear = false;
+      this.router.navigate(['home/teachers']);
+    }
   }
 
   toClassRoute(): void {
-    this.router.navigate(['home/classes']).then(() => {
-      window.location.reload();
+    if (this.classRoute) {
+      this.sidebarAppear = false;
+      this.router.navigate(['home/classes']);
+    }
+  }
+  onSelectionChange(e): void {
+    // console.log(e);
+    let studentId = this.students.filter(v => {
+      return e.value === v.username;
+    });
+    studentId = studentId[0].id;
+    this.authService.getPaymentByUser(studentId).subscribe(
+      (res) => {
+        this.payments = res.payments.map(v => ({
+          id: v._id,
+          amount: v.amount,
+          class: this.displayClassName(v.class_id)
+        }));
+      }
+    );
+  }
+
+  displayClassName(id): any {
+    const selectedClass = this.classes.filter((v) => {
+      return v.id === id;
+    });
+    return selectedClass[0].name;
+  }
+
+  onCloseModal(): void {
+    this.userPaymentModalActivated = false;
+    this.dataTransferService.activatedEmitter.next({
+      modal: false
+    });
+  }
+
+  onOpenModal(e): void {
+    // console.log(e);
+    e.stopPropagation();
+    this.userPaymentModalActivated = true;
+    this.dataTransferService.activatedEmitter.next({
+      modal: true
     });
   }
 }

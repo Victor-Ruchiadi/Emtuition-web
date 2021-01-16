@@ -7,7 +7,7 @@
     height: 100%;
     position: relative;
     background-color: white;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 table {

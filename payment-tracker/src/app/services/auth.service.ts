@@ -191,4 +191,23 @@ export class AuthService {
     changeClassStudentStatus(obj): any {
         return this.http.post(`${this.endpoint}/api/classes/students/change`, obj);
     }
+
+    getAllUserPayment(): any {
+        return this.http.post(`${this.endpoint}/api/payment`, this.data);
+    }
+
+    changePaymentAmount(obj): any {
+        return this.http.post(`${this.endpoint}/api/payment/change`, obj);
+    }
+
+    getAllCLassesName(): any {
+        return this.http.post(`${this.endpoint}/api/classes/name`, this.data);
+    }
+
+    getPaymentByUser(userId): any {
+        this.data = {
+            student: +userId
+        };
+        return this.http.post(`${this.endpoint}/api/payment/user`, this.data);
+    }
 }
