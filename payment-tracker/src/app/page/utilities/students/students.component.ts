@@ -23,11 +23,11 @@ export class StudentsComponent implements OnInit {
   constructor(private authService: AuthService, private excelUtility: ExcelUtility) { }
 
   ngOnInit(): void {
-    const excelFile = '../../../assets/excel/Mandarin-3b.xlsm';
-    this.excelUtility.loadFromUrl(excelFile).then((w) => {
-      console.log(w);
-      this.spreadsheet.workbook = w;
-    });
+    // const excelFile = '../../../assets/excel/Mandarin-3b.xlsm';
+    // this.excelUtility.loadFromUrl(excelFile).then((w) => {
+    //   console.log(w);
+    //   this.spreadsheet.workbook = w;
+    // });
     this.authService.getAllStudents().subscribe(
       (res) => {
         res.forEach(v => {

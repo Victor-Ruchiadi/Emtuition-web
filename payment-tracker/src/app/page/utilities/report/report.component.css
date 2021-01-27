@@ -1,0 +1,56 @@
+.select-table {
+    width: fit-content;
+    margin: 20px auto;
+}
+
+tr th,
+tr td {
+    width: 300px;
+    text-align: center;
+    border: 1px solid;
+}
+
+thead tr th {
+    background: #425CB7;
+    color: white;
+}
+
+tbody tr td:hover {
+    color: #7f7f7f;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.inline-block {
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.inline-block:hover {
+    color: #7f7f7f;
+}
+
+.arrow {
+    display: inline-block;
+    padding: 0 5px;
+}
+
+.month-picker {
+    text-align: center;
+}
+
+table thead tr th.amount {
+    width: 200px;
+}
+
+table tbody tr td.amount-content {
+    text-align: right;
+    width: 200px;
+    padding-right: 5px;
+}
+
+table tbody tr td.amount-content:hover {
+    color: black;
+}

@@ -1,4 +1,4 @@
-<div class="wrapper" [ngClass]="{'darker': userPaymentModalActivated === true}">
+<div class="wrapper" [ngClass]="{'darker': modalActivated === true}">
     <div class="search-container">
         <label for="search-text">Search Text:</label>
         <div>
@@ -44,6 +44,7 @@
                 <td>
                     <div *ngIf="!update[i]">
                         <button class="update-btn" (click)="activateModal(i)">EDIT</button>
+                        <button class="add-btn" (click)="activateAddPaymentModal(i)">ADD PAYMENT</button>
                         <!-- <button class="update-btn" (click)="update[i] = true; inputValues[i] = values[i]">EDIT</button> -->
                     </div>
                     <!-- <div *ngIf="update[i]">

@@ -4,6 +4,7 @@ import { OnPageNotificationService } from 'src/app/services/on-page-notification
 import _ from 'lodash';
 import { UserPaymentService } from 'src/app/services/user-payment.service';
 import { DataTransferService } from 'src/app/services/data-transfer.service';
+import { UserAddPaymentService } from 'src/app/services/user-add-payment.service';
 
 @Component({
   selector: 'app-payment',
@@ -13,7 +14,7 @@ import { DataTransferService } from 'src/app/services/data-transfer.service';
 export class PaymentComponent implements OnInit {
   payments;
   paymentsInput = [];
-  userPaymentModalActivated = false;
+  modalActivated = false;
 
   loaded = false;
   student = {};
@@ -34,12 +35,13 @@ export class PaymentComponent implements OnInit {
     private authService: AuthService,
     private onPageNotificationService: OnPageNotificationService,
     private userPaymentService: UserPaymentService,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private userAddPaymentService: UserAddPaymentService
   ) { }
 
   ngOnInit(): void {
     this.dataTransferService.activatedEmitter.subscribe(data => {
-      this.userPaymentModalActivated = data.modal;
+      this.modalActivated = data.modal;
     });
     this.authService.getAllStudents().subscribe(
       (res) => {
@@ -183,7 +185,18 @@ export class PaymentComponent implements OnInit {
       status: true,
       student: studentName
     });
-    this.userPaymentModalActivated = true;
+    this.modalActivated = true;
+  }
+
+  activateAddPaymentModal(i): void {
+    console.log(i);
+    console.log(this.students);
+    const studentName = this.students[i].username;
+    this.userAddPaymentService.activatedEmitter.next({
+      status: true,
+      student: studentName
+    });
+    this.modalActivated = true;
   }
 }
 

@@ -9,13 +9,16 @@
 }
 
 .modal {
-    width: 60vw;
-    height: 80vh;
+    width: 80vw;
+    height: 90vh;
     background-color: white;
     position: fixed;
     overflow: hidden;
-    left: 20vw;
-    top: 10vh;
+    left: 10vw;
+    top: 5vh;
+    display: grid;
+    grid-template-areas: "header" "content" "footer";
+    grid-template-rows: 47px 1fr 29px;
     /* margin-top: 5vh;
     margin-bottom: 5vh;
     margin-left: 5vw;
@@ -36,6 +39,27 @@
     /* color: rgba(0, 0, 0, 0); */
 }
 
+
+/* ::ng-deep .form-control:read-only {
+    background-color: white;
+}
+
+::ng-deep .month-picker,
+::ng-deep .month:read-only {
+    background-clip: none;
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 0;
+    color: black;
+    display: block;
+    font-size: 20px;
+    line-height: 0;
+    padding: 0;
+    margin: 5px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    width: fit-content;
+} */
+
 .darker {
     filter: brightness(50%);
     overflow: hidden;
@@ -50,11 +74,17 @@
     filter: brightness(100%) !important;
 }
 
-.content {
+.modal-content {
+    grid-area: content;
     color: black;
+    /* padding-bottom: 300px; */
+    /* height: ; */
+    position: relative;
+    /* display: grid; */
 }
 
 .modal .modal-header {
+    grid-area: header;
     width: 100%;
     text-align: center;
     font-size: xx-large;
@@ -95,9 +125,10 @@ td {
 }
 
 .modal-footer {
+    grid-area: footer;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
+    /* bottom: 0; */
     display: grid;
 }
 
@@ -138,6 +169,14 @@ table button {
 
 .update-btn:hover {
     background-color: #ffe57f;
+}
+
+.add-btn {
+    background-color: #42b79a;
+}
+
+.add-btn:hover {
+    background-color: #9fdccd;
 }
 
 .modal-content {

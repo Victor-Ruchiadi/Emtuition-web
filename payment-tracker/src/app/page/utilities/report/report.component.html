@@ -1,1 +1,67 @@
-<p>report works!</p>
+<div class="header">
+    <div class="inline-block" (click)="goToMain()">
+        Main
+    </div>
+    <div *ngIf="teacherSelected" class="arrow">
+        >
+    </div>
+    <div *ngIf="teacherSelected" (click)="goToTeacher()" class="inline-block">
+        {{ selectedTeacherValue }}
+    </div>
+    <div *ngIf="classSelected" class="arrow">
+        >
+    </div>
+    <div *ngIf="classSelected" (click)="goToClass()" class="inline-block">
+        {{ selectedClassValue }}
+    </div>
+    <div *ngIf="loaded" class="month-picker">
+        <!-- <ng-month-picker [showIcon]="true" [displayFormat]="'MMMM YYYY'" [valueFormat]="'MMMM YYYY'" [(ngModel)]="monthSelected"></ng-month-picker> -->
+        <ng-month-picker [showIcon]="true" [displayFormat]="'MMMM YYYY'" [valueFormat]="'MMMM YYYY'" [(ngModel)]="monthSelected" (ngModelChange)="changeMonth()"></ng-month-picker>
+    </div>
+</div>
+<div *ngIf="loaded" class="content">
+    <div class="select-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        {{ tableContent }}
+                    </th>
+                    <th class="amount">
+                        Amount
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="tableContent === 'Teachers'">
+                <tr *ngFor="let teacher of teachers">
+                    <td (click)="getAllClass(teacher.id)">
+                        {{ teacher.username }}
+                    </td>
+                    <td class="amount-content">
+                        {{ teacher.amount|currency: "IDR" }}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="tableContent === 'Classes'">
+                <tr *ngFor="let class of classes">
+                    <td (click)="getAllStudents(class.id)">
+                        {{ class.name }}
+                    </td>
+                    <td class="amount-content">
+                        {{ class.amount|currency: "IDR" }}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="tableContent === 'Students'">
+                <tr *ngFor="let student of students">
+                    <td>
+                        {{ student.username }}
+                    </td>
+                    <td class="amount-content">
+                        {{ student.amount|currency: "IDR" }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

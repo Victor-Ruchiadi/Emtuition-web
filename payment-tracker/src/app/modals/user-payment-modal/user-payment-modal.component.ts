@@ -35,9 +35,6 @@ export class UserPaymentModalComponent implements OnInit {
       }
     );
 
-    this.dataTransferService.activatedEmitter.subscribe(data => {
-      this.userPaymentModalActivated = data.modal;
-    });
 
     this.authService.getAllStudents().subscribe(
       (res) => {
@@ -56,6 +53,7 @@ export class UserPaymentModalComponent implements OnInit {
 
     this.userPaymentService.activatedEmitter.subscribe(data => {
       console.log(data);
+      this.update = [];
       this.lastAmountAppear = false;
       this.userPaymentModalActivated = data.status;
       this.selectedStudent = data.student;

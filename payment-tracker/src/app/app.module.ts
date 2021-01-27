@@ -1,7 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './page/auth/login/login.component';
@@ -13,7 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotFoundPageComponent } from './page/utilities/not-found-page/not-found-page.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './page/utilities/settings/settings.component';
 import { TokenInterceptor } from './middleware/token.interceptor';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
@@ -37,6 +36,8 @@ import { IgxSpreadsheetModule } from 'igniteui-angular-spreadsheet';
 import { ClassesAddStudentsComponent } from './page/utilities/classes-add-students/classes-add-students.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserPaymentModalComponent } from './modals/user-payment-modal/user-payment-modal.component';
+import { UserAddPaymentModalComponent } from './modals/user-add-payment-modal/user-add-payment-modal.component';
+import { NgMonthPickerModule } from 'ng-month-picker';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { UserPaymentModalComponent } from './modals/user-payment-modal/user-paym
     TeacherAddComponent,
     ClassesAddStudentsComponent,
     TooltipListPipe,
-    UserPaymentModalComponent
+    UserPaymentModalComponent,
+    UserAddPaymentModalComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,9 @@ import { UserPaymentModalComponent } from './modals/user-payment-modal/user-paym
     Ng2SearchPipeModule,
     IgxExcelModule,
     IgxSpreadsheetModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ReactiveFormsModule,
+    NgMonthPickerModule
   ],
   providers: [
     {

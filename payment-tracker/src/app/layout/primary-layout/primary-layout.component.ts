@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { EnvelopeService } from 'src/app/services/envelope.service';
 import { OnPageNotificationService } from 'src/app/services/on-page-notification.service';
+import { UserAddPaymentService } from 'src/app/services/user-add-payment.service';
 import { UserPaymentService } from 'src/app/services/user-payment.service';
 import { HeaderComponent } from './components/header/header.component';
 
@@ -18,6 +19,8 @@ export class PrimaryLayoutComponent implements OnInit{
   dropdownAppear = false;
   d = new Date();
   year = this.d.getFullYear();
+  userPaymentModalActivated = false;
+  userAddPaymentModalActivated = false;
 
   student;
   students = [];
@@ -46,7 +49,7 @@ export class PrimaryLayoutComponent implements OnInit{
   onPageNotifActivated = false;
   onPageNotifBgColor = '';
   onPageNotifText = '';
-  userPaymentModalActivated = false;
+  modalActivated = false;
 
   username = localStorage.getItem('username');
 
@@ -56,12 +59,13 @@ export class PrimaryLayoutComponent implements OnInit{
     private userPaymentService: UserPaymentService,
     private authService: AuthService,
     private router: Router,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private userAddPaymentService: UserAddPaymentService
   ) { }
 
   ngOnInit(): void {
     this.dataTransferService.activatedEmitter.subscribe(data => {
-      this.userPaymentModalActivated = data.modal;
+      this.modalActivated = data.modal;
     });
     this.envelopeService.activatedEmitter.subscribe(data => {
       this.envActivated = data.status;
@@ -74,14 +78,19 @@ export class PrimaryLayoutComponent implements OnInit{
       // this.onPageNotifBgColor = data.color;
       this.onPageNotifBgColor = this.checkColor(data.color);
       this.onPageNotifText = data.text;
-      // setTimeout(() => {
-      //   this.onPageNotifActivated = false;
-      // }, 10000);
+      setTimeout(() => {
+        this.onPageNotifActivated = false;
+      }, 10000);
     });
     this.userPaymentService.activatedEmitter.subscribe(data => {
       console.log(data);
       // this.sidebarAppear = false;
+      this.modalActivated = data.status;
       this.userPaymentModalActivated = data.status;
+    });
+    this.userAddPaymentService.activatedEmitter.subscribe(data => {
+      this.modalActivated = data.status;
+      this.userAddPaymentModalActivated = data.status;
     });
     if (this.permissions) {
       this.permissions.forEach(v => {
@@ -186,7 +195,7 @@ export class PrimaryLayoutComponent implements OnInit{
   }
 
   onCloseModal(): void {
-    this.userPaymentModalActivated = false;
+    this.modalActivated = false;
     this.dataTransferService.activatedEmitter.next({
       modal: false
     });
@@ -195,7 +204,7 @@ export class PrimaryLayoutComponent implements OnInit{
   onOpenModal(e): void {
     // console.log(e);
     e.stopPropagation();
-    this.userPaymentModalActivated = true;
+    this.modalActivated = true;
     this.dataTransferService.activatedEmitter.next({
       modal: true
     });

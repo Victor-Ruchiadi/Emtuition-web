@@ -38,12 +38,12 @@ button {
     display: inline-block;
 }
 
-.cancel-btn {
-    background-color: #f55a4e;
+.add-btn {
+    background-color: #42b79a;
 }
 
-.cancel-btn:hover {
-    background-color: #faaca6;
+.add-btn:hover {
+    background-color: #9fdccd;
 }
 
 .update-btn {

@@ -210,4 +210,19 @@ export class AuthService {
         };
         return this.http.post(`${this.endpoint}/api/payment/user`, this.data);
     }
+
+    getStudentPaymentLog(payment): any {
+        this.data = {
+            payments: payment
+        };
+        return this.http.post(`${this.endpoint}/api/payment/students/log`, this.data);
+    }
+
+    addStudentPayment(obj): any {
+        return this.http.post(`${this.endpoint}/api/payment/students/add`, obj);
+    }
+
+    getAllPayments(): any {
+        return this.http.post(`${this.endpoint}/api/payment/all`, this.data);
+    }
 }
