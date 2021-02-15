@@ -9,18 +9,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ReportComponent implements OnInit {
   userIsAdmin = false;
+  tableActive = true;
   loaded = false;
   teacherId;
   currentClassId;
   teacherSelected = false;
   classSelected = false;
+  studentSelected = false;
   selectedTeacherValue = '';
   selectedClassValue = '';
+  selectedStudentValue = '';
+  selectedStudentId;
   teachers = [];
   classes = [];
   students = [];
+  studentData;
   tableContent = 'Classes';
   monthSelected;
+  studentCanDisplay = false;
   payment = {
     classes: [],
     classUserPayment: [],
@@ -132,6 +138,7 @@ export class ReportComponent implements OnInit {
   }
 
   goToMain(): void {
+    this.tableActive = true;
     this.teacherSelected = false;
     this.classSelected = false;
     if (this.userIsAdmin) {
@@ -142,8 +149,15 @@ export class ReportComponent implements OnInit {
   }
 
   goToTeacher(): void {
+    this.tableActive = true;
     this.classSelected = false;
     this.tableContent = 'Classes';
+  }
+
+  goToClass(): void {
+    this.tableActive = true;
+    this.studentSelected = false;
+    this.tableContent = 'Students';
   }
 
   getClassAmount(classId): number {
@@ -229,5 +243,62 @@ export class ReportComponent implements OnInit {
         v.amount = this.getStudentAmount(v.id, this.currentClassId);
       });
     }
+    if (this.studentCanDisplay === true) {
+      const classes = this.getClassByStudent(this.selectedStudentId);
+      const amountClass = [];
+      classes.classesId.forEach(v => {
+        amountClass.push(this.getStudentAmount(this.selectedStudentId, v));
+      });
+      this.studentData.amount = amountClass;
+    }
+  }
+
+  studentOverview(id): void {
+    this.authService.getStudentById(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.selectedStudentValue = res.username;
+        this.selectedStudentId = res._id;
+        const classes = this.getClassByStudent(res._id);
+        const amountClass = [];
+        classes.classesId.forEach(v => {
+          amountClass.push(this.getStudentAmount(res._id, v));
+        });
+        this.studentData = {
+          id: res._id,
+          username: res.username,
+          created_date: res.created_date,
+          role: 'Student',
+          classes: classes.array,
+          classesId: classes.classesId,
+          amount: amountClass
+        };
+        this.studentCanDisplay = true;
+        this.studentSelected = true;
+        console.log(this.studentData);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.tableActive = false;
+  }
+
+  getClassByStudent(id): any {
+    const classUserPayment = this.payment.classUserPayment.filter(v => {
+      return id === v.student_id;
+    });
+    const classesId = [];
+    classUserPayment.forEach(v => {
+      classesId.push(v.class_id);
+    });
+    const classes = this.payment.classes.filter(v => {
+      return classesId.includes(v.id);
+    });
+    const array = [];
+    classes.forEach(v => {
+      array.push(v.name);
+    });
+    return {array, classesId};
   }
 }

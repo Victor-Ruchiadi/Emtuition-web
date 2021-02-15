@@ -45,8 +45,8 @@
     border: 1px white solid;
     border-radius: 25px;
     width: 100%;
-    margin: 5px 5%;
-    margin-left: 0;
+    margin: 5% auto;
+    /* margin-left: 0; */
     height: 30px;
     font-size: larger;
     color: white;
@@ -142,6 +142,33 @@ button div {
 
 .google-btn {
     color: #f55a4e;
+}
+
+.notif {
+    margin: 5% auto;
+    background: white;
+    padding: 8px;
+    /* border-radius: 25px; */
+    padding-left: 20px;
+    color: #f55a4e;
+    border: 5px solid;
+}
+
+.notif i {
+    width: 5%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: initial;
+}
+
+.notif div {
+    width: 80%;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.success {
+    color: #52a77d;
 }
 
 @media (max-width: 992px) {

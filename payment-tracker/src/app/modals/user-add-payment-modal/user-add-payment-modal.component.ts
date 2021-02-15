@@ -32,6 +32,7 @@ export const MY_MOMENT_DATE_TIME_FORMATS: OwlDateTimeFormats = {
 })
 export class UserAddPaymentModalComponent implements OnInit {
   paymentsDate = [];
+  paymentsDateMoment = [];
   desc = [];
   lastAmountAppear = false;
   classes = [];
@@ -83,6 +84,7 @@ export class UserAddPaymentModalComponent implements OnInit {
       this.desc = [];
       this.paymentsDateDisplay = false;
       this.paymentsDate = [];
+      this.paymentsDateMoment = [];
       this.lastAmountAppear = false;
       this.selectedStudent = data.student;
       let studentId = this.students.filter(v => {
@@ -129,6 +131,7 @@ export class UserAddPaymentModalComponent implements OnInit {
     this.paymentsDateDisplay = false;
     // const today = _moment().format('MMMM YYYY');
     this.paymentsDate = [];
+    this.paymentsDateMoment = [];
     this.lastAmountAppear = false;
     // console.log(e);
     let studentId = this.students.filter(v => {
@@ -171,6 +174,7 @@ export class UserAddPaymentModalComponent implements OnInit {
     this.dataTransferService.activatedEmitter.next({
       modal: false
     });
+    this.paymentsDateMoment = [];
     this.paymentsDate = [];
   }
 
@@ -201,6 +205,14 @@ export class UserAddPaymentModalComponent implements OnInit {
     this.authService.addStudentPayment(obj).subscribe(
       (res) => {
         console.log(res);
+        if (res.type === 'success') {
+          this.onActivateNotification('success', res.message);
+          this.paymentsDateMoment[i] = this.paymentsDateMoment[i].add(1, 'M');
+          this.paymentsDate[i] = this.paymentsDateMoment[i].format('MMMM YYYY');
+          this.lastAmountAppear = true;
+        } else {
+          this.onActivateNotification('danger', res.message);
+        }
       },
       (err) => {
         console.log(err);
@@ -246,12 +258,14 @@ export class UserAddPaymentModalComponent implements OnInit {
         // console.log(splitted);
         splitted[0] = moment().month(splitted[0]).format('M');
         const format = splitted[0] + ' ' + splitted[1];
-        const month = _moment(format, 'MM YYYY').add(1, 'M').format('MMMM YYYY');
+        const month = _moment(format, 'MM YYYY').add(1, 'M');
         console.log(month);
-        this.paymentsDate.push(month);
+        this.paymentsDateMoment.push(month);
+        this.paymentsDate.push(month.format('MMMM YYYY'));
       } else {
-        const today = _moment().format('MMMM YYYY');
-        this.paymentsDate.push(today);
+        const today = _moment();
+        this.paymentsDateMoment.push(today);
+        this.paymentsDate.push(today.format('MMMM YYYY'));
       }
     }
     console.log(this.paymentsDate);

@@ -9,7 +9,7 @@ import { OnPageNotificationService } from 'src/app/services/on-page-notification
   styleUrls: ['./classes-add-students.component.css']
 })
 export class ClassesAddStudentsComponent implements OnInit {
-
+  loaded = false;
   searchText1 = '';
   searchText2 = '';
   newestId;
@@ -63,6 +63,7 @@ export class ClassesAddStudentsComponent implements OnInit {
         });
         this.teacherId = res.teacherId;
         this.newestId = res.newestId;
+        this.loaded = true;
       },
       (err) => {
         console.log(err);
@@ -95,25 +96,31 @@ export class ClassesAddStudentsComponent implements OnInit {
     this.authService.changeClassStudentStatus(details).subscribe(
       (res) => {
         if (res.success) {
+          this.loaded = false;
           this.authService.getClassInfo(this.classId).subscribe(
             (result) => {
               console.log(result);
               this.originalAvailable = [];
+              this.availableStudents = [];
               result.availableStudents.forEach(v => {
                 const obj = {
                   _id: v._id,
                   username: v.username
                 };
                 this.originalAvailable.push(obj);
+                this.availableStudents.push(obj);
               });
               this.originalAdded = [];
+              this.addedStudents = [];
               result.selectedStudents.forEach(v => {
                 const obj = {
                   _id: v._id,
                   username: v.username
                 };
                 this.originalAdded.push(obj);
+                this.addedStudents.push(obj);
               });
+              this.loaded = true;
             },
             (err) => {
               console.log(err);
@@ -139,15 +146,50 @@ export class ClassesAddStudentsComponent implements OnInit {
   }
 
   changeToAdded(i): void {
-    const newAdded = this.availableStudents[i];
+    this.loaded = false;
+    const alreadyAdded = this.originalAdded.filter(v => {
+      return v._id === this.availableStudents[i]._id;
+    });
+    let newAdded;
+    if (alreadyAdded.length > 0) {
+      newAdded = {
+        _id: this.availableStudents[i]._id,
+        username: this.availableStudents[i].username
+      };
+    } else {
+      newAdded = {
+        _id: this.availableStudents[i]._id,
+        username: this.availableStudents[i].username,
+        newAdded: true
+      };
+    }
     this.addedStudents.push(newAdded);
     this.availableStudents = this.availableStudents.filter(v => v._id !== newAdded._id);
+    this.loaded = true;
   }
 
   changeToAvailable(i): void {
-    const newAvailable = this.addedStudents[i];
+    this.loaded = false;
+    const alreadyAvailable = this.originalAvailable.filter(v => {
+      return v._id === this.addedStudents[i]._id;
+    });
+    let newAvailable;
+    if (alreadyAvailable.length > 0) {
+      newAvailable = {
+        _id: this.addedStudents[i]._id,
+        username: this.addedStudents[i].username
+      };
+    } else {
+      newAvailable = {
+        _id: this.addedStudents[i]._id,
+        username: this.addedStudents[i].username,
+        newAdded: true
+      };
+    }
+    console.log(newAvailable);
     this.availableStudents.push(newAvailable);
     this.addedStudents = this.addedStudents.filter(v => v._id !== newAvailable._id);
+    this.loaded = true;
   }
 
   createIdArray(s): any {
@@ -160,5 +202,19 @@ export class ClassesAddStudentsComponent implements OnInit {
     }
     console.log(idArr);
     return idArr;
+  }
+
+  displayAddedStudents(): any {
+    const array = this.addedStudents.map(v => {
+      return v.username;
+    });
+    return array;
+  }
+
+  displayAvailableStudents(): any {
+    const array = this.availableStudents.map(v => {
+      return v.username;
+    });
+    return array;
   }
 }

@@ -38,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserPaymentModalComponent } from './modals/user-payment-modal/user-payment-modal.component';
 import { UserAddPaymentModalComponent } from './modals/user-add-payment-modal/user-add-payment-modal.component';
 import { NgMonthPickerModule } from 'ng-month-picker';
+import { HomeComponent } from './page/utilities/home/home.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { NgMonthPickerModule } from 'ng-month-picker';
     ClassesAddStudentsComponent,
     TooltipListPipe,
     UserPaymentModalComponent,
-    UserAddPaymentModalComponent
+    UserAddPaymentModalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

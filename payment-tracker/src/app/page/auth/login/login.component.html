@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" (keyup.enter)="onSubmit()">
     <div class="container">
         <div class="left">
             <h1 class="title">LOGIN</h1>
@@ -15,6 +15,18 @@
                         'fa-eye': passwordAppear === true,
                         'fa-eye-slash': passwordAppear === false
                     }"></i>
+                </div>
+                <div class="notif" *ngIf="loginError === true">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        {{ notifText }}
+                    </div>
+                </div>
+                <div class="notif success" *ngIf="settingsUpdated === true">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        {{ notifText }}
+                    </div>
                 </div>
                 <button type="button" class="login-btn" (click)="onSubmit()">LOG IN</button>
                 <button type="button" class="login-btn google-btn" (click)="googleLogin()">

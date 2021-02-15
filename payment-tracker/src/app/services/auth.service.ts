@@ -8,12 +8,14 @@ export class AuthService {
 
     endpoint = 'http://localhost:8500';
     data = {};
+    tokenExpirationTimer;
 
     login(user, pass): any {
         this.data = {
             username: user,
             password: pass
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/login`, this.data);
     }
 
@@ -34,6 +36,7 @@ export class AuthService {
             id: emailId,
             id_token: idToken
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/google/register`, this.data);
     }
 
@@ -44,14 +47,17 @@ export class AuthService {
             photo_url: photoUrl,
             id: emailId
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/facebook/register`, this.data);
     }
 
     unbindGoogle(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/google/unbind`, this.data);
     }
 
     unbindFacebook(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/facebook/unbind`, this.data);
     }
 
@@ -62,12 +68,26 @@ export class AuthService {
         localStorage.removeItem('facebook');
         localStorage.removeItem('permissions');
         this.router.navigate(['/login']);
+        // this.router.navigate(['/login']).then(() => {
+            // window.location.reload();
+        // });
+        if (this.tokenExpirationTimer) {
+            clearTimeout(this.tokenExpirationTimer);
+        }
+        this.tokenExpirationTimer = null;
+    }
+
+    autoLogOut(): void {
+        this.tokenExpirationTimer = setTimeout(() => {
+            this.logOut();
+        }, 7200000);
     }
 
     loginGoogle(emailAddress): any {
         this.data = {
             email: emailAddress
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/google/login`, this.data);
     }
 
@@ -75,14 +95,17 @@ export class AuthService {
         this.data = {
             email: emailAddress
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/facebook/login`, this.data);
     }
 
     checkPermission(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/permission/check`, this.data);
     }
 
     getAllTeachers(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/teachers/list`, this.data);
     }
 
@@ -90,6 +113,7 @@ export class AuthService {
         this.data = {
             id: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/teachers/delete`, this.data);
     }
 
@@ -97,6 +121,7 @@ export class AuthService {
         this.data = {
             id: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/students/id`, this.data);
     }
 
@@ -106,10 +131,12 @@ export class AuthService {
             username: user,
             password: pass
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/students/data/change`, this.data);
     }
 
     getAllStudents(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/students/list`, this.data);
     }
 
@@ -117,6 +144,7 @@ export class AuthService {
         this.data = {
             id: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/students/delete`, this.data);
     }
 
@@ -124,6 +152,7 @@ export class AuthService {
         this.data = {
             id: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/teachers/id`, this.data);
     }
 
@@ -133,6 +162,7 @@ export class AuthService {
             username: user,
             password: pass
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/teachers/data/change`, this.data);
     }
 
@@ -140,10 +170,12 @@ export class AuthService {
         this.data = {
             teacher: user
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/list`, this.data);
     }
 
     addClass(obj): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/add`, obj);
     }
 
@@ -151,10 +183,12 @@ export class AuthService {
         this.data = {
             id: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/id`, this.data);
     }
 
     changeClassData(obj): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/data/change`, obj);
     }
 
@@ -162,6 +196,7 @@ export class AuthService {
         this.data = {
             id: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/delete`, this.data);
     }
 
@@ -170,6 +205,7 @@ export class AuthService {
             username: user,
             password: pass
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/students/add`, this.data);
     }
 
@@ -178,6 +214,7 @@ export class AuthService {
             username: user,
             password: pass
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/teachers/add`, this.data);
     }
 
@@ -185,22 +222,27 @@ export class AuthService {
         this.data = {
             class: +index
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/students`, this.data);
     }
 
     changeClassStudentStatus(obj): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/students/change`, obj);
     }
 
     getAllUserPayment(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/payment`, this.data);
     }
 
     changePaymentAmount(obj): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/payment/change`, obj);
     }
 
     getAllCLassesName(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/classes/name`, this.data);
     }
 
@@ -208,6 +250,7 @@ export class AuthService {
         this.data = {
             student: +userId
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/payment/user`, this.data);
     }
 
@@ -215,14 +258,17 @@ export class AuthService {
         this.data = {
             payments: payment
         };
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/payment/students/log`, this.data);
     }
 
     addStudentPayment(obj): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/payment/students/add`, obj);
     }
 
     getAllPayments(): any {
+        this.autoLogOut();
         return this.http.post(`${this.endpoint}/api/payment/all`, this.data);
     }
 }

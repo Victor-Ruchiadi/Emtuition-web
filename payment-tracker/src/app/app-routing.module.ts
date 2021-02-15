@@ -17,10 +17,12 @@ import { ClassesEditComponent } from './page/utilities/classes-edit/classes-edit
 import { TeacherAddComponent } from './page/utilities/teacher-add/teacher-add.component';
 import { StudentsAddComponent } from './page/utilities/students-add/students-add.component';
 import { ClassesAddStudentsComponent } from './page/utilities/classes-add-students/classes-add-students.component';
+import { HomeComponent } from './page/utilities/home/home.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: PrimaryLayoutComponent, canActivate: [AuthGuard] , children: [
+    { path: '', component: HomeComponent },
     { path: 'settings', component: SettingsComponent },
     { path: 'students', component: StudentsComponent },
     { path: 'students/add', component: StudentsAddComponent },

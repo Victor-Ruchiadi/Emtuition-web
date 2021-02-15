@@ -1,0 +1,58 @@
+<div class="wrapper">
+    <div class="header">ANOUNCEMENT</div>
+    <div class="content">
+        Haven't paid (as of {{ thisMonth }})
+        <div class="months">
+            <div class="month" (click)="lastThreeMonthsPayments[0] = !lastThreeMonthsPayments[0]">
+                <div class="month-text">{{ lastThreeMonths[0] }} ( {{ lastTwoMonthsPayment.length }} students )</div>
+                <div class="icon-div">
+                    <i class="fas" [ngClass]="{'fa-caret-down': lastThreeMonthsPayments[0] === true,'fa-caret-right': lastThreeMonthsPayments[0] === false }"></i>
+                </div>
+            </div>
+            <div *ngIf="lastThreeMonthsPayments[0]">
+                <ul *ngFor="let payment of lastTwoMonthsPayment">
+                    <li style="color: #f55a4e;">
+                        {{ payment.student }} ( {{ payment.class }} )
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="months">
+            <div class="month" (click)="lastThreeMonthsPayments[1] = !lastThreeMonthsPayments[1]">
+                <div class="month-text">{{ lastThreeMonths[1] }} ( {{ lastMonthPayment.length }} students )</div>
+                <div class="icon-div">
+                    <i class="fas" [ngClass]="{'fa-caret-down': lastThreeMonthsPayments[1] === true,'fa-caret-right': lastThreeMonthsPayments[1] === false }"></i>
+                </div>
+            </div>
+            <div *ngIf="lastThreeMonthsPayments[1]">
+                <ul *ngFor="let payment of lastMonthPayment">
+                    <li style="color: #ffcc00;">
+                        {{ payment.student }} ( {{ payment.class }} )
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="months">
+            <div class="month" (click)="lastThreeMonthsPayments[2] = !lastThreeMonthsPayments[2]">
+                <div class="month-text">{{ lastThreeMonths[2] }} ( {{ thisMonthPayment.length }} students )</div>
+                <div class="icon-div">
+                    <i class="fas" [ngClass]="{'fa-caret-down': lastThreeMonthsPayments[2] === true,'fa-caret-right': lastThreeMonthsPayments[2] === false }"></i>
+                </div>
+            </div>
+            <div *ngIf="lastThreeMonthsPayments[2]">
+                <ul *ngFor="let payment of thisMonthPayment">
+                    <li style="color: #ffcc00;">
+                        {{ payment.student }} ( {{ payment.class }} )
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- <ul *ngFor="let student of studentsDisplay">
+            <li *ngIf="student.not_paid.length > 0">
+                <div [ngStyle]="{'color': student.color}">
+                    {{student.student_name}} ( {{ student.class_name }} )
+                </div>
+            </li>
+        </ul> -->
+    </div>
+</div>

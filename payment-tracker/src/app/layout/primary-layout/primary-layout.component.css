@@ -2,8 +2,9 @@
     display: grid;
     width: 100vw;
     height: 100vh;
-    grid-template-areas: "sidebar main";
+    grid-template-areas: "sidebar main" "copyright copyright";
     grid-template-columns: 200px;
+    grid-template-rows: 1fr 48.89px;
     transition: all 1s;
     /* transform: translateX(100%); */
     position: fixed;
@@ -18,6 +19,7 @@
     /* color: white; */
     padding-bottom: 60px;
     overflow: scroll;
+    height: 100%;
 }
 
 .main {
@@ -46,8 +48,8 @@
 
 .content {
     grid-area: content;
-    /* padding-bottom: 30px; */
-    overflow: hidden;
+    /* padding-bottom: 50px; */
+    overflow: scroll;
 }
 
 .envelope {
@@ -274,12 +276,16 @@
 
 .content {
     background-color: white;
-    padding-bottom: 50px;
+    height: 100%;
+    /* padding-bottom: 50px; */
 }
 
 .copyright {
+    grid-area: copyright;
     text-align: center;
-    width: 100vw;
+    vertical-align: super;
+    width: 100%;
+    /* height: 50px; */
     padding-bottom: 10px;
     padding-top: 10px;
     background-color: #F5F0F2;

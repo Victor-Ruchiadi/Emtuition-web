@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { EnvelopeService } from 'src/app/services/envelope.service';
 import { OnPageNotificationService } from 'src/app/services/on-page-notification.service';
 
@@ -41,7 +42,8 @@ export class SettingsComponent implements OnInit {
     private envelopeService: EnvelopeService,
     private onPageNotificationService: OnPageNotificationService,
     private authService: AuthService,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private dataTransferService: DataTransferService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +59,7 @@ export class SettingsComponent implements OnInit {
         (res) => {
           console.log(res);
           this.onActivate('success', 'Settings updated');
+          localStorage.setItem('settingsUpdated', 'success');
           this.authService.logOut();
         }, (err) => {
           console.log(err);

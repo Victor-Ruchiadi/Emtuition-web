@@ -34,7 +34,8 @@
                             <input style="margin: 5px;" type="text" placeholder="DESCRIPTION" [(ngModel)]="desc[i]">
                         </td>
                         <td style="padding: 5px;">
-                            <ng-month-picker [showIcon]="true" [displayFormat]="'MMMM YYYY'" [valueFormat]="'MMMM YYYY'" [(ngModel)]="paymentsDate[i]"></ng-month-picker>
+                            <!-- <input style="margin: 5px;" type="text" [(ngModel)]="paymentsDate[i]" readonly> -->
+                            <ng-month-picker [showIcon]="false" [isReadOnly]="true" readonly [displayFormat]="'MMMM YYYY'" [valueFormat]="'MMMM YYYY'" [(ngModel)]="paymentsDate[i]"></ng-month-picker>
                         </td>
                         <td>
                             <button class="add-btn" (click)="onClickAdd(i)">ADD</button>

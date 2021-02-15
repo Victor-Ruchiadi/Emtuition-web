@@ -1,0 +1,62 @@
+.wrapper {
+    margin: 15px;
+    overflow: scroll;
+    padding-bottom: 50px;
+}
+
+.header {
+    text-align: center;
+    background: #425CB7;
+    color: white;
+    font-size: xx-large;
+}
+
+.content {
+    border: 1px solid;
+}
+
+li {
+    margin-left: 30px;
+}
+
+.months {
+    width: 300px;
+    margin: 5px;
+}
+
+.months div {
+    overflow: scroll;
+}
+
+.month {
+    background-color: silver;
+    color: white;
+    padding: 5px;
+    width: 100%;
+    overflow: scroll;
+}
+
+.content {
+    overflow: scroll;
+}
+
+
+/* .months div div i {
+    width: 20px;
+    display: inline-block;
+} */
+
+i {
+    text-align: right;
+}
+
+.icon-div {
+    display: inline-block;
+    width: 15%;
+    text-align: right;
+}
+
+.month-text {
+    width: 80%;
+    display: inline-block;
+}
